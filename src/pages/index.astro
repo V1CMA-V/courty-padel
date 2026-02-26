@@ -1,20 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro'
+
+import { auth } from '@/lib/auth' // import your Better Auth instance
+
+export const prerender = false // Not needed in 'server' mode
+
+const session = await auth.api.getSession({
+  headers: Astro.request.headers,
+})
 ---
 
 <Layout>
   <main>
     <h1>Better Auth + Astro + Prisma</h1>
     {
-      Astro.locals.user ? (
+      session ? (
         <div>
-          <p>Welcome back, {Astro.locals.user.name}!</p>
+          <p>Welcome back, {session.user.name}!</p>
           <a href="/dashboard">Go to Dashboard</a>
         </div>
       ) : (
         <div>
-          <a href="/sign-up">Sign Up</a>
           <a href="/sign-in">Sign In</a>
+        </div>
+      )
+    }
+
+    {
+      session && (
+        <div>
+          <p>{session.user?.name}</p>
         </div>
       )
     }

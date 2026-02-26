@@ -1,45 +1,23 @@
 ---
 export const prerender = false
 
-if (Astro.locals.user?.id) return Astro.redirect('/dashboard') // [!code ++]
+import SignIn from '@/components/sign-in'
+import Layout from '@/layouts/Layout.astro'
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Sign In</title>
-  </head>
-  <body>
-    <main>
-      <h1>Sign In</h1>
-      <form id="signin-form">
-        <input type="email" name="email" placeholder="Email" required />
-        <input
-          required
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <button type="submit">Sign In</button>
-      </form>
-      <p>Don't have an account? <a href="/sign-up">Sign up here</a>.</p>
-    </main>
-    <script>
-      import { authClient } from '../../lib/auth-client'
-      document
-        .getElementById('signin-form')
-        ?.addEventListener('submit', async (event) => {
-          event.preventDefault()
-          const formData = new FormData(event.target as HTMLFormElement)
-          const email = formData.get('email') as string
-          const password = formData.get('password') as string
-          const tmp = await authClient.signIn.email({
-            email,
-            password,
-          })
-          if (Boolean(tmp.error) === false) window.location.href = '/dashboard'
-        })
-    </script>
-  </body>
-</html>
+<Layout title="Sign In">
+  <!-- <SignIn /> -->
+
+  <button id="login">Login</button>
+  <button id="logout">Logout</button>
+
+  <script>
+    const { signIn, signOut } = await import('@/lib/auth-client')
+    document.querySelector('#login')!.onclick = () =>
+      signIn.social({
+        provider: 'google',
+        callbackURL: '/dashboard',
+      })
+    document.querySelector('#logout')!.onclick = () => signOut()
+  </script>
+</Layout>
