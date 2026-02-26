@@ -1,13 +1,22 @@
 ---
-import { Button } from '@/components/ui/button'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout>
-  <section
-    class="h-screen w-full flex items-center justify-center flex-col gap-4"
-  >
-    <h1 class="text-4xl font-bold">Courty Padel</h1>
-    <Button>Button</Button>
-  </section>
+  <main>
+    <h1>Better Auth + Astro + Prisma</h1>
+    {
+      Astro.locals.user ? (
+        <div>
+          <p>Welcome back, {Astro.locals.user.name}!</p>
+          <a href="/dashboard">Go to Dashboard</a>
+        </div>
+      ) : (
+        <div>
+          <a href="/sign-up">Sign Up</a>
+          <a href="/sign-in">Sign In</a>
+        </div>
+      )
+    }
+  </main>
 </Layout>
