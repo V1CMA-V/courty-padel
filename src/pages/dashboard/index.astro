@@ -1,7 +1,12 @@
 ---
 export const prerender = false
+import { auth } from '@/lib/auth'
 
-if (!Astro.locals.user?.id) return Astro.redirect('/sign-in')
+const session = await auth.api.getSession({
+  headers: Astro.request.headers,
+})
+
+if (!session?.user?.id) return Astro.redirect('/sign-in')
 ---
 
 <html lang="en">
@@ -13,7 +18,7 @@ if (!Astro.locals.user?.id) return Astro.redirect('/sign-in')
   <body>
     <main>
       <h1>Dashboard</h1>
-      <pre>{JSON.stringify(Astro.locals.user, null, 2)}</pre>
+      <pre>{JSON.stringify(session.user, null, 2)}</pre>
       <button id="signOutButton">Sign Out</button> // [!code ++]
     </main>
     <script>
