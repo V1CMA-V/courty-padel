@@ -1,0 +1,75 @@
+---
+export const prerender = false
+
+import UserSidebar from '@/components/UserSidebar.astro'
+import Layout from '@/layouts/Layout.astro'
+import { auth } from '@/lib/auth'
+
+const session = await auth.api.getSession({
+  headers: Astro.request.headers,
+})
+
+if (!session?.user?.id) return Astro.redirect('/sign-in')
+
+const currentPath = Astro.url.pathname
+---
+
+<Layout title="Facturación - Courty Padel">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-foreground">Configuración</h1>
+      <p class="text-sm text-muted-foreground mt-1">
+        Administra tu cuenta y perfil de jugador.
+      </p>
+    </div>
+    <div class="flex flex-col md:flex-row gap-8">
+      <UserSidebar currentPath={currentPath} />
+      <div class="flex-1 min-w-0">
+        <div class="rounded-xl border bg-card p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <svg
+              class="w-5 h-5 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+              ></path>
+            </svg>
+            <h2 class="text-lg font-bold text-foreground">Facturación</h2>
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">
+            Gestiona tus métodos de pago y consulta tu historial de
+            transacciones.
+          </p>
+
+          <div class="text-center py-12">
+            <svg
+              class="mx-auto w-12 h-12 text-muted-foreground/30"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+              ></path>
+            </svg>
+            <p class="mt-4 text-sm text-muted-foreground">
+              No tienes transacciones registradas.
+            </p>
+            <p class="mt-1 text-xs text-muted-foreground">
+              Las facturas de tus inscripciones aparecerán aquí.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -54,7 +54,10 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Player: 'Player',
+  Tournament: 'Tournament',
+  TournamentEnrollment: 'TournamentEnrollment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -129,6 +132,54 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const PlayerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  displayName: 'displayName',
+  nickname: 'nickname',
+  dominantHand: 'dominantHand',
+  preferredSide: 'preferredSide',
+  playStyle: 'playStyle',
+  level: 'level',
+  heightCm: 'heightCm',
+  birthDate: 'birthDate',
+  about: 'about',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
+
+
+export const TournamentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  location: 'location',
+  date: 'date',
+  maxPairs: 'maxPairs',
+  category: 'category',
+  status: 'status',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TournamentScalarFieldEnum = (typeof TournamentScalarFieldEnum)[keyof typeof TournamentScalarFieldEnum]
+
+
+export const TournamentEnrollmentScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  tournamentId: 'tournamentId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TournamentEnrollmentScalarFieldEnum = (typeof TournamentEnrollmentScalarFieldEnum)[keyof typeof TournamentEnrollmentScalarFieldEnum]
 
 
 export const SortOrder = {

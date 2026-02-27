@@ -59,3 +59,18 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Player
+ * 
+ */
+export type Player = Prisma.PlayerModel
+/**
+ * Model Tournament
+ * 
+ */
+export type Tournament = Prisma.TournamentModel
+/**
+ * Model TournamentEnrollment
+ * 
+ */
+export type TournamentEnrollment = Prisma.TournamentEnrollmentModel

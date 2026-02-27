@@ -77,17 +77,23 @@ export function NavUser({ user, variant = 'header' }: NavUserProps) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <User />
-            Cuenta
+          <DropdownMenuItem asChild>
+            <a href="/user">
+              <User />
+              Cuenta
+            </a>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <CreditCard />
-            Facturación
+          <DropdownMenuItem asChild>
+            <a href="/user/facturazion">
+              <CreditCard />
+              Facturación
+            </a>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Bell />
-            Notificaciones
+          <DropdownMenuItem asChild>
+            <a href="/user/notification">
+              <Bell />
+              Notificaciones
+            </a>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

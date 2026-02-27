@@ -23,6 +23,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  player        Player?
 
   @@unique([email])
   @@map("user")
@@ -74,4 +75,68 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Player {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  displayName String?
+  nickname    String?
+
+  dominantHand  String? // RIGHT | LEFT | BOTH
+  preferredSide String? // LEFT | RIGHT | BOTH
+  playStyle     String? // AGGRESSIVE | DEFENSIVE | BALANCED
+  level         String? // BEGINNER | INTERMEDIATE | ADVANCED | PRO
+
+  heightCm  Int?
+  birthDate DateTime?
+
+  about String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments TournamentEnrollment[]
+
+  @@index([userId])
+  @@map("player")
+}
+
+model Tournament {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  location    String?
+  date        DateTime
+  maxPairs    Int      @default(32)
+  category    String? // OPEN | NOCTURNO | EXPRESS
+  status      String   @default("OPEN") // OPEN | IN_PROGRESS | FINISHED | CANCELLED
+  imageUrl    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments TournamentEnrollment[]
+
+  @@map("tournament")
+}
+
+model TournamentEnrollment {
+  id           String     @id @default(cuid())
+  playerId     String
+  player       Player     @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  status String @default("CONFIRMED") // CONFIRMED | PENDING | CANCELLED
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([playerId, tournamentId])
+  @@index([playerId])
+  @@index([tournamentId])
+  @@map("tournament_enrollment")
 }
