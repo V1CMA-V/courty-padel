@@ -56,6 +56,7 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Player: 'Player',
+  Club: 'Club',
   Tournament: 'Tournament',
   TournamentCategory: 'TournamentCategory',
   TournamentEnrollment: 'TournamentEnrollment'
@@ -154,8 +155,28 @@ export const PlayerScalarFieldEnum = {
 export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
 
 
+export const ClubScalarFieldEnum = {
+  id: 'id',
+  ownerUserId: 'ownerUserId',
+  name: 'name',
+  description: 'description',
+  address: 'address',
+  city: 'city',
+  state: 'state',
+  country: 'country',
+  phone: 'phone',
+  website: 'website',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ClubScalarFieldEnum = (typeof ClubScalarFieldEnum)[keyof typeof ClubScalarFieldEnum]
+
+
 export const TournamentScalarFieldEnum = {
   id: 'id',
+  clubId: 'clubId',
   name: 'name',
   description: 'description',
   venueNote: 'venueNote',

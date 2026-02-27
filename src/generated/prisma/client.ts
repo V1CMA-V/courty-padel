@@ -65,6 +65,11 @@ export type Verification = Prisma.VerificationModel
  */
 export type Player = Prisma.PlayerModel
 /**
+ * Model Club
+ * 
+ */
+export type Club = Prisma.ClubModel
+/**
  * Model Tournament
  * 
  */

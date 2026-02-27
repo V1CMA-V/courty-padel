@@ -1,0 +1,10 @@
+---
+export const prerender = false
+
+import Layout from '@/layouts/Layout.astro'
+import { ClubsPage } from '@/components/ClubsPage'
+---
+
+<Layout title="Clubs - Courty Padel" description="Descubre los clubs de padel asociados.">
+  <ClubsPage client:load />
+</Layout>

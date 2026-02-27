@@ -389,6 +389,7 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Player: 'Player',
+  Club: 'Club',
   Tournament: 'Tournament',
   TournamentCategory: 'TournamentCategory',
   TournamentEnrollment: 'TournamentEnrollment'
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "player" | "tournament" | "tournamentCategory" | "tournamentEnrollment"
+    modelProps: "user" | "session" | "account" | "verification" | "player" | "club" | "tournament" | "tournamentCategory" | "tournamentEnrollment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -781,6 +782,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Club: {
+      payload: Prisma.$ClubPayload<ExtArgs>
+      fields: Prisma.ClubFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ClubFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ClubFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>
+        }
+        findFirst: {
+          args: Prisma.ClubFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ClubFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>
+        }
+        findMany: {
+          args: Prisma.ClubFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>[]
+        }
+        create: {
+          args: Prisma.ClubCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>
+        }
+        createMany: {
+          args: Prisma.ClubCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ClubCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>[]
+        }
+        delete: {
+          args: Prisma.ClubDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>
+        }
+        update: {
+          args: Prisma.ClubUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>
+        }
+        deleteMany: {
+          args: Prisma.ClubDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ClubUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ClubUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>[]
+        }
+        upsert: {
+          args: Prisma.ClubUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClubPayload>
+        }
+        aggregate: {
+          args: Prisma.ClubAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClub>
+        }
+        groupBy: {
+          args: Prisma.ClubGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClubGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ClubCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClubCountAggregateOutputType> | number
+        }
+      }
+    }
     Tournament: {
       payload: Prisma.$TournamentPayload<ExtArgs>
       fields: Prisma.TournamentFieldRefs
@@ -1119,8 +1194,28 @@ export const PlayerScalarFieldEnum = {
 export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
 
 
+export const ClubScalarFieldEnum = {
+  id: 'id',
+  ownerUserId: 'ownerUserId',
+  name: 'name',
+  description: 'description',
+  address: 'address',
+  city: 'city',
+  state: 'state',
+  country: 'country',
+  phone: 'phone',
+  website: 'website',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ClubScalarFieldEnum = (typeof ClubScalarFieldEnum)[keyof typeof ClubScalarFieldEnum]
+
+
 export const TournamentScalarFieldEnum = {
   id: 'id',
+  clubId: 'clubId',
   name: 'name',
   description: 'description',
   venueNote: 'venueNote',
@@ -1357,6 +1452,7 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
   player?: Prisma.PlayerOmit
+  club?: Prisma.ClubOmit
   tournament?: Prisma.TournamentOmit
   tournamentCategory?: Prisma.TournamentCategoryOmit
   tournamentEnrollment?: Prisma.TournamentEnrollmentOmit
