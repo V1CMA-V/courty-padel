@@ -1,0 +1,20 @@
+---
+import DashboardLayout from '@/layouts/DashboardLayout.astro'
+export const prerender = false
+---
+
+<DashboardLayout title="Jugadores - Courty Padel">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-2xl font-bold tracking-tight">Jugadores</h1>
+      <p class="text-muted-foreground">Visualiza y gestiona los jugadores de tu club.</p>
+    </div>
+
+    <div class="flex items-center justify-center rounded-xl border border-dashed bg-card p-16">
+      <div class="text-center">
+        <p class="text-lg font-medium text-muted-foreground">No hay jugadores registrados</p>
+        <p class="mt-1 text-sm text-muted-foreground">Los jugadores aparecerán aquí cuando se inscriban.</p>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>

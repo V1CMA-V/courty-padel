@@ -1,0 +1,75 @@
+---
+import '../styles/global.css'
+import { auth } from '@/lib/auth'
+import { DashboardSidebar } from '@/components/DashboardSidebar'
+import { Toaster } from '@/components/ui/sonner'
+
+export const prerender = false
+
+interface Props {
+  title?: string
+}
+
+const { title = 'Dashboard - Courty Padel' } = Astro.props
+
+const session = await auth.api.getSession({
+  headers: Astro.request.headers,
+})
+
+if (!session?.user?.id) return Astro.redirect('/sign-in')
+
+const user = {
+  name: session.user.name,
+  email: session.user.email,
+  image: session.user.image,
+}
+
+const currentPath = Astro.url.pathname
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-[Inter,sans-serif]">
+    <DashboardSidebar client:load user={user} currentPath={currentPath}>
+      <slot />
+    </DashboardSidebar>
+    <Toaster />
+  </body>
+</html>
+
+<script is:inline>
+  const getThemePreference = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme')
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+  }
+  const isDark = getThemePreference() === 'dark'
+  document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
+
+  if (typeof localStorage !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('dark')
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    })
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+  }
+</script>

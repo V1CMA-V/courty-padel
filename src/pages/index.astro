@@ -19,7 +19,7 @@ const session = await auth.api.getSession({
   description="La plataforma de padel #1. Encuentra torneos, reserva canchas y conecta con la comunidad."
 >
   <main>
-    <Hero />
+    <Hero isLoggedIn={!!session} />
     <FeaturedTournaments />
     <StatsSection />
     <PartnerClubs />

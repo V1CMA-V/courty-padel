@@ -1,3 +1,11 @@
+---
+interface Props {
+  isLoggedIn?: boolean
+}
+
+const { isLoggedIn = false } = Astro.props
+---
+
 <section
   class="relative min-h-[90dvh] flex items-center justify-center overflow-hidden"
 >
@@ -39,12 +47,23 @@
     <div
       class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
     >
-      <a
-        href="/sign-in"
-        class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
-      >
-        Comenzar ahora
-      </a>
+      {
+        isLoggedIn ? (
+          <a
+            href="/dashboard"
+            class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
+          >
+            Ir al Dashboard
+          </a>
+        ) : (
+          <a
+            href="/sign-in"
+            class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
+          >
+            Comenzar ahora
+          </a>
+        )
+      }
       <a
         href="#torneos"
         class="inline-flex items-center justify-center h-12 px-8 rounded-lg border border-white/30 text-white font-semibold text-base hover:bg-white/10 backdrop-blur-sm transition-all hover:-translate-y-0.5"

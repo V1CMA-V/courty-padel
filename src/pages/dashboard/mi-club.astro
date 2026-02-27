@@ -1,0 +1,27 @@
+---
+import { ClubForm } from '@/components/ClubForm'
+import { CourtsManager } from '@/components/CourtsManager'
+import DashboardLayout from '@/layouts/DashboardLayout.astro'
+export const prerender = false
+---
+
+<DashboardLayout title="Mi Club - Courty Padel">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-2xl font-bold tracking-tight">Mi Club</h1>
+      <p class="text-muted-foreground">Administra la información de tu club.</p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-[1fr_380px]">
+      <div class="rounded-xl border bg-card p-6 shadow-sm">
+        <h2 class="text-lg font-semibold mb-4">Información del club</h2>
+        <ClubForm client:load />
+      </div>
+
+      <div class="rounded-xl border bg-card p-6 shadow-sm h-fit">
+        <h2 class="text-lg font-semibold mb-4">Canchas</h2>
+        <CourtsManager client:load />
+      </div>
+    </div>
+  </div>
+</DashboardLayout>

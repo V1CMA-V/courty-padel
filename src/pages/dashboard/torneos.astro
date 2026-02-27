@@ -1,0 +1,26 @@
+---
+import { TournamentsList } from '@/components/TournamentsList'
+import DashboardLayout from '@/layouts/DashboardLayout.astro'
+export const prerender = false
+---
+
+<DashboardLayout title="Torneos - Courty Padel">
+  <div class="space-y-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight">Mis Torneos</h1>
+        <p class="text-muted-foreground">
+          Gestiona y organiza tus torneos de padel.
+        </p>
+      </div>
+      <a
+        href="/dashboard/torneos/nuevo"
+        class="inline-flex items-center justify-center h-9 px-4 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors shadow-sm"
+      >
+        + Crear torneo
+      </a>
+    </div>
+
+    <TournamentsList client:load />
+  </div>
+</DashboardLayout>
