@@ -1,5 +1,5 @@
-import type { APIRoute } from 'astro'
 import prisma from '@/lib/prisma'
+import type { APIRoute } from 'astro'
 
 export const prerender = false
 
@@ -36,9 +36,10 @@ export const GET: APIRoute = async ({ url }) => {
   const tournaments = await prisma.tournament.findMany({
     where,
     include: {
-      categories: true,
-      _count: {
-        select: { enrollments: true },
+      categories: {
+        include: {
+          _count: { select: { entries: true } },
+        },
       },
     },
     orderBy: { startDate: 'asc' },

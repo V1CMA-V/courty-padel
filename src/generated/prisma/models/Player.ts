@@ -281,7 +281,6 @@ export type PlayerWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  enrollments?: Prisma.TournamentEnrollmentListRelationFilter
 }
 
 export type PlayerOrderByWithRelationInput = {
@@ -299,7 +298,6 @@ export type PlayerOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  enrollments?: Prisma.TournamentEnrollmentOrderByRelationAggregateInput
 }
 
 export type PlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -320,7 +318,6 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  enrollments?: Prisma.TournamentEnrollmentListRelationFilter
 }, "id" | "userId">
 
 export type PlayerOrderByWithAggregationInput = {
@@ -377,7 +374,6 @@ export type PlayerCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
-  enrollments?: Prisma.TournamentEnrollmentCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateInput = {
@@ -394,7 +390,6 @@ export type PlayerUncheckedCreateInput = {
   about?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  enrollments?: Prisma.TournamentEnrollmentUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUpdateInput = {
@@ -411,7 +406,6 @@ export type PlayerUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
-  enrollments?: Prisma.TournamentEnrollmentUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateInput = {
@@ -428,7 +422,6 @@ export type PlayerUncheckedUpdateInput = {
   about?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  enrollments?: Prisma.TournamentEnrollmentUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateManyInput = {
@@ -539,11 +532,6 @@ export type PlayerSumOrderByAggregateInput = {
   heightCm?: Prisma.SortOrder
 }
 
-export type PlayerScalarRelationFilter = {
-  is?: Prisma.PlayerWhereInput
-  isNot?: Prisma.PlayerWhereInput
-}
-
 export type PlayerCreateNestedOneWithoutUserInput = {
   create?: Prisma.XOR<Prisma.PlayerCreateWithoutUserInput, Prisma.PlayerUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutUserInput
@@ -584,20 +572,6 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type PlayerCreateNestedOneWithoutEnrollmentsInput = {
-  create?: Prisma.XOR<Prisma.PlayerCreateWithoutEnrollmentsInput, Prisma.PlayerUncheckedCreateWithoutEnrollmentsInput>
-  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutEnrollmentsInput
-  connect?: Prisma.PlayerWhereUniqueInput
-}
-
-export type PlayerUpdateOneRequiredWithoutEnrollmentsNestedInput = {
-  create?: Prisma.XOR<Prisma.PlayerCreateWithoutEnrollmentsInput, Prisma.PlayerUncheckedCreateWithoutEnrollmentsInput>
-  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutEnrollmentsInput
-  upsert?: Prisma.PlayerUpsertWithoutEnrollmentsInput
-  connect?: Prisma.PlayerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutEnrollmentsInput, Prisma.PlayerUpdateWithoutEnrollmentsInput>, Prisma.PlayerUncheckedUpdateWithoutEnrollmentsInput>
-}
-
 export type PlayerCreateWithoutUserInput = {
   id?: string
   displayName?: string | null
@@ -611,7 +585,6 @@ export type PlayerCreateWithoutUserInput = {
   about?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  enrollments?: Prisma.TournamentEnrollmentCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutUserInput = {
@@ -627,7 +600,6 @@ export type PlayerUncheckedCreateWithoutUserInput = {
   about?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  enrollments?: Prisma.TournamentEnrollmentUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutUserInput = {
@@ -659,7 +631,6 @@ export type PlayerUpdateWithoutUserInput = {
   about?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  enrollments?: Prisma.TournamentEnrollmentUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutUserInput = {
@@ -675,118 +646,8 @@ export type PlayerUncheckedUpdateWithoutUserInput = {
   about?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  enrollments?: Prisma.TournamentEnrollmentUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
-export type PlayerCreateWithoutEnrollmentsInput = {
-  id?: string
-  displayName?: string | null
-  nickname?: string | null
-  dominantHand?: string | null
-  preferredSide?: string | null
-  playStyle?: string | null
-  level?: string | null
-  heightCm?: number | null
-  birthDate?: Date | string | null
-  about?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutPlayerInput
-}
-
-export type PlayerUncheckedCreateWithoutEnrollmentsInput = {
-  id?: string
-  userId: string
-  displayName?: string | null
-  nickname?: string | null
-  dominantHand?: string | null
-  preferredSide?: string | null
-  playStyle?: string | null
-  level?: string | null
-  heightCm?: number | null
-  birthDate?: Date | string | null
-  about?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type PlayerCreateOrConnectWithoutEnrollmentsInput = {
-  where: Prisma.PlayerWhereUniqueInput
-  create: Prisma.XOR<Prisma.PlayerCreateWithoutEnrollmentsInput, Prisma.PlayerUncheckedCreateWithoutEnrollmentsInput>
-}
-
-export type PlayerUpsertWithoutEnrollmentsInput = {
-  update: Prisma.XOR<Prisma.PlayerUpdateWithoutEnrollmentsInput, Prisma.PlayerUncheckedUpdateWithoutEnrollmentsInput>
-  create: Prisma.XOR<Prisma.PlayerCreateWithoutEnrollmentsInput, Prisma.PlayerUncheckedCreateWithoutEnrollmentsInput>
-  where?: Prisma.PlayerWhereInput
-}
-
-export type PlayerUpdateToOneWithWhereWithoutEnrollmentsInput = {
-  where?: Prisma.PlayerWhereInput
-  data: Prisma.XOR<Prisma.PlayerUpdateWithoutEnrollmentsInput, Prisma.PlayerUncheckedUpdateWithoutEnrollmentsInput>
-}
-
-export type PlayerUpdateWithoutEnrollmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  preferredSide?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  level?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  about?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
-}
-
-export type PlayerUncheckedUpdateWithoutEnrollmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  preferredSide?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  level?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  about?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-
-/**
- * Count Type PlayerCountOutputType
- */
-
-export type PlayerCountOutputType = {
-  enrollments: number
-}
-
-export type PlayerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  enrollments?: boolean | PlayerCountOutputTypeCountEnrollmentsArgs
-}
-
-/**
- * PlayerCountOutputType without action
- */
-export type PlayerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PlayerCountOutputType
-   */
-  select?: Prisma.PlayerCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * PlayerCountOutputType without action
- */
-export type PlayerCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TournamentEnrollmentWhereInput
-}
 
 
 export type PlayerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -804,8 +665,6 @@ export type PlayerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  enrollments?: boolean | Prisma.Player$enrollmentsArgs<ExtArgs>
-  _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["player"]>
 
 export type PlayerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -861,8 +720,6 @@ export type PlayerSelectScalar = {
 export type PlayerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "displayName" | "nickname" | "dominantHand" | "preferredSide" | "playStyle" | "level" | "heightCm" | "birthDate" | "about" | "createdAt" | "updatedAt", ExtArgs["result"]["player"]>
 export type PlayerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  enrollments?: boolean | Prisma.Player$enrollmentsArgs<ExtArgs>
-  _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PlayerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -875,7 +732,6 @@ export type $PlayerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Player"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    enrollments: Prisma.$TournamentEnrollmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1286,7 +1142,6 @@ readonly fields: PlayerFieldRefs;
 export interface Prisma__PlayerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  enrollments<T extends Prisma.Player$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TournamentEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1722,30 +1577,6 @@ export type PlayerDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Players to delete.
    */
   limit?: number
-}
-
-/**
- * Player.enrollments
- */
-export type Player$enrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TournamentEnrollment
-   */
-  select?: Prisma.TournamentEnrollmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TournamentEnrollment
-   */
-  omit?: Prisma.TournamentEnrollmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TournamentEnrollmentInclude<ExtArgs> | null
-  where?: Prisma.TournamentEnrollmentWhereInput
-  orderBy?: Prisma.TournamentEnrollmentOrderByWithRelationInput | Prisma.TournamentEnrollmentOrderByWithRelationInput[]
-  cursor?: Prisma.TournamentEnrollmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TournamentEnrollmentScalarFieldEnum | Prisma.TournamentEnrollmentScalarFieldEnum[]
 }
 
 /**

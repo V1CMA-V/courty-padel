@@ -58,7 +58,47 @@ export type Tournament = Prisma.TournamentModel
  */
 export type TournamentCategory = Prisma.TournamentCategoryModel
 /**
- * Model TournamentEnrollment
+ * Model Entry
  * 
  */
-export type TournamentEnrollment = Prisma.TournamentEnrollmentModel
+export type Entry = Prisma.EntryModel
+/**
+ * Model EntryPlayer
+ * 
+ */
+export type EntryPlayer = Prisma.EntryPlayerModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model Stage
+ * 
+ */
+export type Stage = Prisma.StageModel
+/**
+ * Model Group
+ * 
+ */
+export type Group = Prisma.GroupModel
+/**
+ * Model GroupMember
+ * 
+ */
+export type GroupMember = Prisma.GroupMemberModel
+/**
+ * Model Court
+ * 
+ */
+export type Court = Prisma.CourtModel
+/**
+ * Model Match
+ * 
+ */
+export type Match = Prisma.MatchModel
+/**
+ * Model MatchSet
+ * 
+ */
+export type MatchSet = Prisma.MatchSetModel

@@ -14,17 +14,19 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String        @id
   name          String
   email         String
-  emailVerified Boolean   @default(false)
+  emailVerified Boolean       @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   sessions      Session[]
   accounts      Account[]
   player        Player?
   clubs         Club[]
+  entries       Entry[] // entries created by this user
+  entryPlayers  EntryPlayer[] // entries this user participates in
 
   @@unique([email])
   @@map("user")
@@ -99,8 +101,6 @@ model Player {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  enrollments TournamentEnrollment[]
-
   @@index([userId])
   @@map("player")
 }
@@ -124,6 +124,7 @@ model Club {
   updatedAt DateTime @updatedAt
 
   tournaments Tournament[]
+  courts      Court[]
 
   @@index([ownerUserId])
   @@map("club")
@@ -149,8 +150,7 @@ model Tournament {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  categories  TournamentCategory[]
-  enrollments TournamentEnrollment[]
+  categories TournamentCategory[]
 
   @@index([clubId])
   @@map("tournament")
@@ -171,25 +171,195 @@ model TournamentCategory {
 
   createdAt DateTime @default(now())
 
+  entries Entry[]
+  stages  Stage[]
+
   @@unique([tournamentId, name])
   @@index([tournamentId])
   @@map("tournament_category")
 }
 
-model TournamentEnrollment {
-  id           String     @id @default(cuid())
-  playerId     String
-  player       Player     @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  tournamentId String
-  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+// =========================
+// ENTRIES / PLAYERS
+// =========================
 
-  status String @default("CONFIRMED") // CONFIRMED | PENDING | CANCELLED
+model Entry {
+  id              String             @id @default(cuid())
+  categoryId      String
+  category        TournamentCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdByUserId String
+  createdBy       User               @relation(fields: [createdByUserId], references: [id], onDelete: Cascade)
+
+  status     String  @default("PENDING") // PENDING | CONFIRMED | WAITLIST | CANCELLED
+  publicName String?
+  seed       Int?
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  @@unique([playerId, tournamentId])
-  @@index([playerId])
-  @@index([tournamentId])
-  @@map("tournament_enrollment")
+  players      EntryPlayer[]
+  payments     Payment[]
+  groupMembers GroupMember[]
+  matchesAsA   Match[]       @relation("MatchEntryA")
+  matchesAsB   Match[]       @relation("MatchEntryB")
+  matchesWon   Match[]       @relation("MatchWinner")
+
+  @@index([categoryId])
+  @@index([createdByUserId])
+  @@map("entry")
+}
+
+model EntryPlayer {
+  id       String @id @default(cuid())
+  entryId  String
+  entry    Entry  @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position Int // 1 or 2 (doubles)
+
+  createdAt DateTime @default(now())
+
+  @@unique([entryId, userId])
+  @@unique([entryId, position])
+  @@index([userId])
+  @@map("entry_player")
+}
+
+model Payment {
+  id          String    @id @default(cuid())
+  entryId     String
+  entry       Entry     @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  provider    String?
+  providerRef String?
+  amountCents Int?
+  currency    String?
+  status      String    @default("INITIATED") // INITIATED | PAID | FAILED | REFUNDED
+  paidAt      DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([entryId])
+  @@map("payment")
+}
+
+// =========================
+// STAGES / GROUPS / COURTS / MATCHES
+// =========================
+
+model Stage {
+  id         String             @id @default(cuid())
+  categoryId String
+  category   TournamentCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  name      String
+  stageType String // GROUPS | SINGLE_ELIMINATION | ROUND_ROBIN
+  sortOrder Int?
+  status    String @default("NOT_STARTED") // NOT_STARTED | IN_PROGRESS | COMPLETED
+
+  createdAt DateTime @default(now())
+
+  groups  Group[]
+  matches Match[]
+
+  @@index([categoryId])
+  @@map("stage")
+}
+
+model Group {
+  id      String @id @default(cuid())
+  stageId String
+  stage   Stage  @relation(fields: [stageId], references: [id], onDelete: Cascade)
+
+  name String
+
+  createdAt DateTime @default(now())
+
+  members GroupMember[]
+  matches Match[]
+
+  @@unique([stageId, name])
+  @@index([stageId])
+  @@map("group")
+}
+
+model GroupMember {
+  id      String @id @default(cuid())
+  groupId String
+  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  entryId String
+  entry   Entry  @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([groupId, entryId])
+  @@index([groupId])
+  @@index([entryId])
+  @@map("group_member")
+}
+
+model Court {
+  id     String @id @default(cuid())
+  clubId String
+  club   Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
+
+  name     String
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  matches Match[]
+
+  @@index([clubId])
+  @@map("court")
+}
+
+model Match {
+  id      String  @id @default(cuid())
+  stageId String
+  stage   Stage   @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  groupId String?
+  group   Group?  @relation(fields: [groupId], references: [id], onDelete: SetNull)
+
+  roundLabel String?
+  matchOrder Int?
+
+  entryAId String
+  entryA   Entry  @relation("MatchEntryA", fields: [entryAId], references: [id], onDelete: Cascade)
+  entryBId String
+  entryB   Entry  @relation("MatchEntryB", fields: [entryBId], references: [id], onDelete: Cascade)
+
+  scheduledAt DateTime?
+  courtId     String?
+  court       Court?    @relation(fields: [courtId], references: [id], onDelete: SetNull)
+
+  status        String  @default("SCHEDULED") // SCHEDULED | LIVE | COMPLETED | WALKOVER | CANCELLED
+  winnerEntryId String?
+  winner        Entry?  @relation("MatchWinner", fields: [winnerEntryId], references: [id], onDelete: SetNull)
+  notes         String?
+
+  createdAt DateTime @default(now())
+
+  sets MatchSet[]
+
+  @@index([stageId])
+  @@index([groupId])
+  @@index([entryAId])
+  @@index([entryBId])
+  @@index([courtId])
+  @@map("match")
+}
+
+model MatchSet {
+  id      String @id @default(cuid())
+  matchId String
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  setNumber   Int
+  entryAGames Int
+  entryBGames Int
+  tiebreakA   Int?
+  tiebreakB   Int?
+
+  @@unique([matchId, setNumber])
+  @@index([matchId])
+  @@map("match_set")
 }

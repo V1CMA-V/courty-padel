@@ -59,7 +59,15 @@ export const ModelName = {
   Club: 'Club',
   Tournament: 'Tournament',
   TournamentCategory: 'TournamentCategory',
-  TournamentEnrollment: 'TournamentEnrollment'
+  Entry: 'Entry',
+  EntryPlayer: 'EntryPlayer',
+  Payment: 'Payment',
+  Stage: 'Stage',
+  Group: 'Group',
+  GroupMember: 'GroupMember',
+  Court: 'Court',
+  Match: 'Match',
+  MatchSet: 'MatchSet'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -209,16 +217,119 @@ export const TournamentCategoryScalarFieldEnum = {
 export type TournamentCategoryScalarFieldEnum = (typeof TournamentCategoryScalarFieldEnum)[keyof typeof TournamentCategoryScalarFieldEnum]
 
 
-export const TournamentEnrollmentScalarFieldEnum = {
+export const EntryScalarFieldEnum = {
   id: 'id',
-  playerId: 'playerId',
-  tournamentId: 'tournamentId',
+  categoryId: 'categoryId',
+  createdByUserId: 'createdByUserId',
   status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  publicName: 'publicName',
+  seed: 'seed',
+  createdAt: 'createdAt'
 } as const
 
-export type TournamentEnrollmentScalarFieldEnum = (typeof TournamentEnrollmentScalarFieldEnum)[keyof typeof TournamentEnrollmentScalarFieldEnum]
+export type EntryScalarFieldEnum = (typeof EntryScalarFieldEnum)[keyof typeof EntryScalarFieldEnum]
+
+
+export const EntryPlayerScalarFieldEnum = {
+  id: 'id',
+  entryId: 'entryId',
+  userId: 'userId',
+  position: 'position',
+  createdAt: 'createdAt'
+} as const
+
+export type EntryPlayerScalarFieldEnum = (typeof EntryPlayerScalarFieldEnum)[keyof typeof EntryPlayerScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  entryId: 'entryId',
+  provider: 'provider',
+  providerRef: 'providerRef',
+  amountCents: 'amountCents',
+  currency: 'currency',
+  status: 'status',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const StageScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  name: 'name',
+  stageType: 'stageType',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type StageScalarFieldEnum = (typeof StageScalarFieldEnum)[keyof typeof StageScalarFieldEnum]
+
+
+export const GroupScalarFieldEnum = {
+  id: 'id',
+  stageId: 'stageId',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
+
+
+export const GroupMemberScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  entryId: 'entryId',
+  createdAt: 'createdAt'
+} as const
+
+export type GroupMemberScalarFieldEnum = (typeof GroupMemberScalarFieldEnum)[keyof typeof GroupMemberScalarFieldEnum]
+
+
+export const CourtScalarFieldEnum = {
+  id: 'id',
+  clubId: 'clubId',
+  name: 'name',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type CourtScalarFieldEnum = (typeof CourtScalarFieldEnum)[keyof typeof CourtScalarFieldEnum]
+
+
+export const MatchScalarFieldEnum = {
+  id: 'id',
+  stageId: 'stageId',
+  groupId: 'groupId',
+  roundLabel: 'roundLabel',
+  matchOrder: 'matchOrder',
+  entryAId: 'entryAId',
+  entryBId: 'entryBId',
+  scheduledAt: 'scheduledAt',
+  courtId: 'courtId',
+  status: 'status',
+  winnerEntryId: 'winnerEntryId',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+
+
+export const MatchSetScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  setNumber: 'setNumber',
+  entryAGames: 'entryAGames',
+  entryBGames: 'entryBGames',
+  tiebreakA: 'tiebreakA',
+  tiebreakB: 'tiebreakB'
+} as const
+
+export type MatchSetScalarFieldEnum = (typeof MatchSetScalarFieldEnum)[keyof typeof MatchSetScalarFieldEnum]
 
 
 export const SortOrder = {

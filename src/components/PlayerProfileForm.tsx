@@ -33,7 +33,7 @@ interface PlayerData {
   about: string
 }
 
-interface Enrollment {
+interface EntryInfo {
   id: string
   status: string
   createdAt: string
@@ -133,7 +133,7 @@ function statusBadge(status: string) {
 
 export function PlayerProfileForm({ user }: Props) {
   const [form, setForm] = useState<PlayerData>(emptyPlayer)
-  const [enrollments, setEnrollments] = useState<Enrollment[]>([])
+  const [entries, setEntries] = useState<EntryInfo[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{
@@ -158,7 +158,7 @@ export function PlayerProfileForm({ user }: Props) {
             birthDate: p.birthDate ? p.birthDate.split('T')[0] : '',
             about: p.about ?? '',
           })
-          setEnrollments(p.enrollments ?? [])
+          setEntries(p.entries ?? [])
         }
       })
       .catch(() => {})
@@ -382,7 +382,7 @@ export function PlayerProfileForm({ user }: Props) {
         </CardContent>
       </Card>
 
-      {/* Tournament Enrollments */}
+      {/* Tournament Entries */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -394,7 +394,7 @@ export function PlayerProfileForm({ user }: Props) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {enrollments.length === 0 ? (
+          {entries.length === 0 ? (
             <div className="text-center py-8">
               <Trophy className="mx-auto size-10 text-muted-foreground/40" />
               <p className="mt-3 text-sm text-muted-foreground">
@@ -406,20 +406,20 @@ export function PlayerProfileForm({ user }: Props) {
             </div>
           ) : (
             <div className="space-y-3">
-              {enrollments.map((enrollment) => (
+              {entries.map((entry) => (
                 <div
-                  key={enrollment.id}
+                  key={entry.id}
                   className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border p-4 hover:bg-accent/50 transition-colors"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <h4 className="text-sm font-semibold text-foreground">
-                        {enrollment.tournament.name}
+                        {entry.tournament.name}
                       </h4>
-                      {statusBadge(enrollment.status)}
+                      {statusBadge(entry.status)}
                     </div>
                     <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-                      {enrollment.tournament.location && (
+                      {entry.tournament.location && (
                         <span className="flex items-center gap-1">
                           <svg
                             className="w-3.5 h-3.5"
@@ -440,7 +440,7 @@ export function PlayerProfileForm({ user }: Props) {
                               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                             />
                           </svg>
-                          {enrollment.tournament.location}
+                          {entry.tournament.location}
                         </span>
                       )}
                       <span className="flex items-center gap-1">
@@ -457,15 +457,15 @@ export function PlayerProfileForm({ user }: Props) {
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                           />
                         </svg>
-                        {formatDate(enrollment.tournament.date)}
+                        {formatDate(entry.tournament.date)}
                       </span>
-                      {enrollment.tournament.category && (
-                        <span>{enrollment.tournament.category}</span>
+                      {entry.tournament.category && (
+                        <span>{entry.tournament.category}</span>
                       )}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    {statusBadge(enrollment.tournament.status)}
+                    {statusBadge(entry.tournament.status)}
                   </div>
                 </div>
               ))}

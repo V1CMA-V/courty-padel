@@ -202,6 +202,8 @@ export type UserWhereInput = {
   accounts?: Prisma.AccountListRelationFilter
   player?: Prisma.XOR<Prisma.PlayerNullableScalarRelationFilter, Prisma.PlayerWhereInput> | null
   clubs?: Prisma.ClubListRelationFilter
+  entries?: Prisma.EntryListRelationFilter
+  entryPlayers?: Prisma.EntryPlayerListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -216,6 +218,8 @@ export type UserOrderByWithRelationInput = {
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   player?: Prisma.PlayerOrderByWithRelationInput
   clubs?: Prisma.ClubOrderByRelationAggregateInput
+  entries?: Prisma.EntryOrderByRelationAggregateInput
+  entryPlayers?: Prisma.EntryPlayerOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -233,6 +237,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accounts?: Prisma.AccountListRelationFilter
   player?: Prisma.XOR<Prisma.PlayerNullableScalarRelationFilter, Prisma.PlayerWhereInput> | null
   clubs?: Prisma.ClubListRelationFilter
+  entries?: Prisma.EntryListRelationFilter
+  entryPlayers?: Prisma.EntryPlayerListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -273,6 +279,8 @@ export type UserCreateInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerCreateNestedOneWithoutUserInput
   clubs?: Prisma.ClubCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -287,6 +295,8 @@ export type UserUncheckedCreateInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
   clubs?: Prisma.ClubUncheckedCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -301,6 +311,8 @@ export type UserUpdateInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
   clubs?: Prisma.ClubUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -315,6 +327,8 @@ export type UserUncheckedUpdateInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
   clubs?: Prisma.ClubUncheckedUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -454,6 +468,34 @@ export type UserUpdateOneRequiredWithoutClubsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutClubsInput, Prisma.UserUpdateWithoutClubsInput>, Prisma.UserUncheckedUpdateWithoutClubsInput>
 }
 
+export type UserCreateNestedOneWithoutEntriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEntriesInput, Prisma.UserUncheckedCreateWithoutEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEntriesInput, Prisma.UserUncheckedCreateWithoutEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEntriesInput
+  upsert?: Prisma.UserUpsertWithoutEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEntriesInput, Prisma.UserUpdateWithoutEntriesInput>, Prisma.UserUncheckedUpdateWithoutEntriesInput>
+}
+
+export type UserCreateNestedOneWithoutEntryPlayersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEntryPlayersInput, Prisma.UserUncheckedCreateWithoutEntryPlayersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEntryPlayersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEntryPlayersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEntryPlayersInput, Prisma.UserUncheckedCreateWithoutEntryPlayersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEntryPlayersInput
+  upsert?: Prisma.UserUpsertWithoutEntryPlayersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEntryPlayersInput, Prisma.UserUpdateWithoutEntryPlayersInput>, Prisma.UserUncheckedUpdateWithoutEntryPlayersInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -465,6 +507,8 @@ export type UserCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerCreateNestedOneWithoutUserInput
   clubs?: Prisma.ClubCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -478,6 +522,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
   clubs?: Prisma.ClubUncheckedCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -507,6 +553,8 @@ export type UserUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
   clubs?: Prisma.ClubUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -520,6 +568,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
   clubs?: Prisma.ClubUncheckedUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -533,6 +583,8 @@ export type UserCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerCreateNestedOneWithoutUserInput
   clubs?: Prisma.ClubCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -546,6 +598,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
   clubs?: Prisma.ClubUncheckedCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -575,6 +629,8 @@ export type UserUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
   clubs?: Prisma.ClubUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -588,6 +644,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
   clubs?: Prisma.ClubUncheckedUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPlayerInput = {
@@ -601,6 +659,8 @@ export type UserCreateWithoutPlayerInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   clubs?: Prisma.ClubCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlayerInput = {
@@ -614,6 +674,8 @@ export type UserUncheckedCreateWithoutPlayerInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   clubs?: Prisma.ClubUncheckedCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlayerInput = {
@@ -643,6 +705,8 @@ export type UserUpdateWithoutPlayerInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   clubs?: Prisma.ClubUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlayerInput = {
@@ -656,6 +720,8 @@ export type UserUncheckedUpdateWithoutPlayerInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   clubs?: Prisma.ClubUncheckedUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutClubsInput = {
@@ -669,6 +735,8 @@ export type UserCreateWithoutClubsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutClubsInput = {
@@ -682,6 +750,8 @@ export type UserUncheckedCreateWithoutClubsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCreatedByInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutClubsInput = {
@@ -711,6 +781,8 @@ export type UserUpdateWithoutClubsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClubsInput = {
@@ -724,6 +796,160 @@ export type UserUncheckedUpdateWithoutClubsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutEntriesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  clubs?: Prisma.ClubCreateNestedManyWithoutOwnerInput
+  entryPlayers?: Prisma.EntryPlayerCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutEntriesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  clubs?: Prisma.ClubUncheckedCreateNestedManyWithoutOwnerInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutEntriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEntriesInput, Prisma.UserUncheckedCreateWithoutEntriesInput>
+}
+
+export type UserUpsertWithoutEntriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEntriesInput, Prisma.UserUncheckedUpdateWithoutEntriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEntriesInput, Prisma.UserUncheckedCreateWithoutEntriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEntriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEntriesInput, Prisma.UserUncheckedUpdateWithoutEntriesInput>
+}
+
+export type UserUpdateWithoutEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  clubs?: Prisma.ClubUpdateManyWithoutOwnerNestedInput
+  entryPlayers?: Prisma.EntryPlayerUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  clubs?: Prisma.ClubUncheckedUpdateManyWithoutOwnerNestedInput
+  entryPlayers?: Prisma.EntryPlayerUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutEntryPlayersInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  clubs?: Prisma.ClubCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutEntryPlayersInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  clubs?: Prisma.ClubUncheckedCreateNestedManyWithoutOwnerInput
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutEntryPlayersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEntryPlayersInput, Prisma.UserUncheckedCreateWithoutEntryPlayersInput>
+}
+
+export type UserUpsertWithoutEntryPlayersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEntryPlayersInput, Prisma.UserUncheckedUpdateWithoutEntryPlayersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEntryPlayersInput, Prisma.UserUncheckedCreateWithoutEntryPlayersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEntryPlayersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEntryPlayersInput, Prisma.UserUncheckedUpdateWithoutEntryPlayersInput>
+}
+
+export type UserUpdateWithoutEntryPlayersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  clubs?: Prisma.ClubUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEntryPlayersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  clubs?: Prisma.ClubUncheckedUpdateManyWithoutOwnerNestedInput
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 
@@ -735,12 +961,16 @@ export type UserCountOutputType = {
   sessions: number
   accounts: number
   clubs: number
+  entries: number
+  entryPlayers: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   clubs?: boolean | UserCountOutputTypeCountClubsArgs
+  entries?: boolean | UserCountOutputTypeCountEntriesArgs
+  entryPlayers?: boolean | UserCountOutputTypeCountEntryPlayersArgs
 }
 
 /**
@@ -774,6 +1004,20 @@ export type UserCountOutputTypeCountClubsArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.ClubWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EntryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEntryPlayersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EntryPlayerWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -787,6 +1031,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   player?: boolean | Prisma.User$playerArgs<ExtArgs>
   clubs?: boolean | Prisma.User$clubsArgs<ExtArgs>
+  entries?: boolean | Prisma.User$entriesArgs<ExtArgs>
+  entryPlayers?: boolean | Prisma.User$entryPlayersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -826,6 +1072,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   player?: boolean | Prisma.User$playerArgs<ExtArgs>
   clubs?: boolean | Prisma.User$clubsArgs<ExtArgs>
+  entries?: boolean | Prisma.User$entriesArgs<ExtArgs>
+  entryPlayers?: boolean | Prisma.User$entryPlayersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -838,6 +1086,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     player: Prisma.$PlayerPayload<ExtArgs> | null
     clubs: Prisma.$ClubPayload<ExtArgs>[]
+    entries: Prisma.$EntryPayload<ExtArgs>[]
+    entryPlayers: Prisma.$EntryPlayerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1245,6 +1495,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   player<T extends Prisma.User$playerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$playerArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   clubs<T extends Prisma.User$clubsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$clubsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  entries<T extends Prisma.User$entriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  entryPlayers<T extends Prisma.User$entryPlayersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$entryPlayersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1757,6 +2009,54 @@ export type User$clubsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.ClubScalarFieldEnum | Prisma.ClubScalarFieldEnum[]
+}
+
+/**
+ * User.entries
+ */
+export type User$entriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Entry
+   */
+  select?: Prisma.EntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Entry
+   */
+  omit?: Prisma.EntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EntryInclude<ExtArgs> | null
+  where?: Prisma.EntryWhereInput
+  orderBy?: Prisma.EntryOrderByWithRelationInput | Prisma.EntryOrderByWithRelationInput[]
+  cursor?: Prisma.EntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EntryScalarFieldEnum | Prisma.EntryScalarFieldEnum[]
+}
+
+/**
+ * User.entryPlayers
+ */
+export type User$entryPlayersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EntryPlayer
+   */
+  select?: Prisma.EntryPlayerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EntryPlayer
+   */
+  omit?: Prisma.EntryPlayerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EntryPlayerInclude<ExtArgs> | null
+  where?: Prisma.EntryPlayerWhereInput
+  orderBy?: Prisma.EntryPlayerOrderByWithRelationInput | Prisma.EntryPlayerOrderByWithRelationInput[]
+  cursor?: Prisma.EntryPlayerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EntryPlayerScalarFieldEnum | Prisma.EntryPlayerScalarFieldEnum[]
 }
 
 /**

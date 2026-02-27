@@ -261,6 +261,8 @@ export type TournamentCategoryWhereInput = {
   rules?: Prisma.StringNullableFilter<"TournamentCategory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TournamentCategory"> | Date | string
   tournament?: Prisma.XOR<Prisma.TournamentScalarRelationFilter, Prisma.TournamentWhereInput>
+  entries?: Prisma.EntryListRelationFilter
+  stages?: Prisma.StageListRelationFilter
 }
 
 export type TournamentCategoryOrderByWithRelationInput = {
@@ -275,6 +277,8 @@ export type TournamentCategoryOrderByWithRelationInput = {
   rules?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   tournament?: Prisma.TournamentOrderByWithRelationInput
+  entries?: Prisma.EntryOrderByRelationAggregateInput
+  stages?: Prisma.StageOrderByRelationAggregateInput
 }
 
 export type TournamentCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -293,6 +297,8 @@ export type TournamentCategoryWhereUniqueInput = Prisma.AtLeast<{
   rules?: Prisma.StringNullableFilter<"TournamentCategory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TournamentCategory"> | Date | string
   tournament?: Prisma.XOR<Prisma.TournamentScalarRelationFilter, Prisma.TournamentWhereInput>
+  entries?: Prisma.EntryListRelationFilter
+  stages?: Prisma.StageListRelationFilter
 }, "id" | "tournamentId_name">
 
 export type TournamentCategoryOrderByWithAggregationInput = {
@@ -340,6 +346,8 @@ export type TournamentCategoryCreateInput = {
   rules?: string | null
   createdAt?: Date | string
   tournament: Prisma.TournamentCreateNestedOneWithoutCategoriesInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCategoryInput
+  stages?: Prisma.StageCreateNestedManyWithoutCategoryInput
 }
 
 export type TournamentCategoryUncheckedCreateInput = {
@@ -353,6 +361,8 @@ export type TournamentCategoryUncheckedCreateInput = {
   maxEntries?: number | null
   rules?: string | null
   createdAt?: Date | string
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCategoryInput
+  stages?: Prisma.StageUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type TournamentCategoryUpdateInput = {
@@ -366,6 +376,8 @@ export type TournamentCategoryUpdateInput = {
   rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tournament?: Prisma.TournamentUpdateOneRequiredWithoutCategoriesNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCategoryNestedInput
+  stages?: Prisma.StageUpdateManyWithoutCategoryNestedInput
 }
 
 export type TournamentCategoryUncheckedUpdateInput = {
@@ -379,6 +391,8 @@ export type TournamentCategoryUncheckedUpdateInput = {
   maxEntries?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCategoryNestedInput
+  stages?: Prisma.StageUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type TournamentCategoryCreateManyInput = {
@@ -483,6 +497,11 @@ export type TournamentCategorySumOrderByAggregateInput = {
   maxEntries?: Prisma.SortOrder
 }
 
+export type TournamentCategoryScalarRelationFilter = {
+  is?: Prisma.TournamentCategoryWhereInput
+  isNot?: Prisma.TournamentCategoryWhereInput
+}
+
 export type TournamentCategoryCreateNestedManyWithoutTournamentInput = {
   create?: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutTournamentInput, Prisma.TournamentCategoryUncheckedCreateWithoutTournamentInput> | Prisma.TournamentCategoryCreateWithoutTournamentInput[] | Prisma.TournamentCategoryUncheckedCreateWithoutTournamentInput[]
   connectOrCreate?: Prisma.TournamentCategoryCreateOrConnectWithoutTournamentInput | Prisma.TournamentCategoryCreateOrConnectWithoutTournamentInput[]
@@ -525,6 +544,34 @@ export type TournamentCategoryUncheckedUpdateManyWithoutTournamentNestedInput = 
   deleteMany?: Prisma.TournamentCategoryScalarWhereInput | Prisma.TournamentCategoryScalarWhereInput[]
 }
 
+export type TournamentCategoryCreateNestedOneWithoutEntriesInput = {
+  create?: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutEntriesInput, Prisma.TournamentCategoryUncheckedCreateWithoutEntriesInput>
+  connectOrCreate?: Prisma.TournamentCategoryCreateOrConnectWithoutEntriesInput
+  connect?: Prisma.TournamentCategoryWhereUniqueInput
+}
+
+export type TournamentCategoryUpdateOneRequiredWithoutEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutEntriesInput, Prisma.TournamentCategoryUncheckedCreateWithoutEntriesInput>
+  connectOrCreate?: Prisma.TournamentCategoryCreateOrConnectWithoutEntriesInput
+  upsert?: Prisma.TournamentCategoryUpsertWithoutEntriesInput
+  connect?: Prisma.TournamentCategoryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TournamentCategoryUpdateToOneWithWhereWithoutEntriesInput, Prisma.TournamentCategoryUpdateWithoutEntriesInput>, Prisma.TournamentCategoryUncheckedUpdateWithoutEntriesInput>
+}
+
+export type TournamentCategoryCreateNestedOneWithoutStagesInput = {
+  create?: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutStagesInput, Prisma.TournamentCategoryUncheckedCreateWithoutStagesInput>
+  connectOrCreate?: Prisma.TournamentCategoryCreateOrConnectWithoutStagesInput
+  connect?: Prisma.TournamentCategoryWhereUniqueInput
+}
+
+export type TournamentCategoryUpdateOneRequiredWithoutStagesNestedInput = {
+  create?: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutStagesInput, Prisma.TournamentCategoryUncheckedCreateWithoutStagesInput>
+  connectOrCreate?: Prisma.TournamentCategoryCreateOrConnectWithoutStagesInput
+  upsert?: Prisma.TournamentCategoryUpsertWithoutStagesInput
+  connect?: Prisma.TournamentCategoryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TournamentCategoryUpdateToOneWithWhereWithoutStagesInput, Prisma.TournamentCategoryUpdateWithoutStagesInput>, Prisma.TournamentCategoryUncheckedUpdateWithoutStagesInput>
+}
+
 export type TournamentCategoryCreateWithoutTournamentInput = {
   id?: string
   name: string
@@ -535,6 +582,8 @@ export type TournamentCategoryCreateWithoutTournamentInput = {
   maxEntries?: number | null
   rules?: string | null
   createdAt?: Date | string
+  entries?: Prisma.EntryCreateNestedManyWithoutCategoryInput
+  stages?: Prisma.StageCreateNestedManyWithoutCategoryInput
 }
 
 export type TournamentCategoryUncheckedCreateWithoutTournamentInput = {
@@ -547,6 +596,8 @@ export type TournamentCategoryUncheckedCreateWithoutTournamentInput = {
   maxEntries?: number | null
   rules?: string | null
   createdAt?: Date | string
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCategoryInput
+  stages?: Prisma.StageUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type TournamentCategoryCreateOrConnectWithoutTournamentInput = {
@@ -591,6 +642,150 @@ export type TournamentCategoryScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"TournamentCategory"> | Date | string
 }
 
+export type TournamentCategoryCreateWithoutEntriesInput = {
+  id?: string
+  name: string
+  modality?: string | null
+  gender?: string | null
+  level?: string | null
+  entryFeeCents?: number | null
+  maxEntries?: number | null
+  rules?: string | null
+  createdAt?: Date | string
+  tournament: Prisma.TournamentCreateNestedOneWithoutCategoriesInput
+  stages?: Prisma.StageCreateNestedManyWithoutCategoryInput
+}
+
+export type TournamentCategoryUncheckedCreateWithoutEntriesInput = {
+  id?: string
+  tournamentId: string
+  name: string
+  modality?: string | null
+  gender?: string | null
+  level?: string | null
+  entryFeeCents?: number | null
+  maxEntries?: number | null
+  rules?: string | null
+  createdAt?: Date | string
+  stages?: Prisma.StageUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type TournamentCategoryCreateOrConnectWithoutEntriesInput = {
+  where: Prisma.TournamentCategoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutEntriesInput, Prisma.TournamentCategoryUncheckedCreateWithoutEntriesInput>
+}
+
+export type TournamentCategoryUpsertWithoutEntriesInput = {
+  update: Prisma.XOR<Prisma.TournamentCategoryUpdateWithoutEntriesInput, Prisma.TournamentCategoryUncheckedUpdateWithoutEntriesInput>
+  create: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutEntriesInput, Prisma.TournamentCategoryUncheckedCreateWithoutEntriesInput>
+  where?: Prisma.TournamentCategoryWhereInput
+}
+
+export type TournamentCategoryUpdateToOneWithWhereWithoutEntriesInput = {
+  where?: Prisma.TournamentCategoryWhereInput
+  data: Prisma.XOR<Prisma.TournamentCategoryUpdateWithoutEntriesInput, Prisma.TournamentCategoryUncheckedUpdateWithoutEntriesInput>
+}
+
+export type TournamentCategoryUpdateWithoutEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  modality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  level?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryFeeCents?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxEntries?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tournament?: Prisma.TournamentUpdateOneRequiredWithoutCategoriesNestedInput
+  stages?: Prisma.StageUpdateManyWithoutCategoryNestedInput
+}
+
+export type TournamentCategoryUncheckedUpdateWithoutEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tournamentId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  modality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  level?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryFeeCents?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxEntries?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stages?: Prisma.StageUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
+export type TournamentCategoryCreateWithoutStagesInput = {
+  id?: string
+  name: string
+  modality?: string | null
+  gender?: string | null
+  level?: string | null
+  entryFeeCents?: number | null
+  maxEntries?: number | null
+  rules?: string | null
+  createdAt?: Date | string
+  tournament: Prisma.TournamentCreateNestedOneWithoutCategoriesInput
+  entries?: Prisma.EntryCreateNestedManyWithoutCategoryInput
+}
+
+export type TournamentCategoryUncheckedCreateWithoutStagesInput = {
+  id?: string
+  tournamentId: string
+  name: string
+  modality?: string | null
+  gender?: string | null
+  level?: string | null
+  entryFeeCents?: number | null
+  maxEntries?: number | null
+  rules?: string | null
+  createdAt?: Date | string
+  entries?: Prisma.EntryUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type TournamentCategoryCreateOrConnectWithoutStagesInput = {
+  where: Prisma.TournamentCategoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutStagesInput, Prisma.TournamentCategoryUncheckedCreateWithoutStagesInput>
+}
+
+export type TournamentCategoryUpsertWithoutStagesInput = {
+  update: Prisma.XOR<Prisma.TournamentCategoryUpdateWithoutStagesInput, Prisma.TournamentCategoryUncheckedUpdateWithoutStagesInput>
+  create: Prisma.XOR<Prisma.TournamentCategoryCreateWithoutStagesInput, Prisma.TournamentCategoryUncheckedCreateWithoutStagesInput>
+  where?: Prisma.TournamentCategoryWhereInput
+}
+
+export type TournamentCategoryUpdateToOneWithWhereWithoutStagesInput = {
+  where?: Prisma.TournamentCategoryWhereInput
+  data: Prisma.XOR<Prisma.TournamentCategoryUpdateWithoutStagesInput, Prisma.TournamentCategoryUncheckedUpdateWithoutStagesInput>
+}
+
+export type TournamentCategoryUpdateWithoutStagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  modality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  level?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryFeeCents?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxEntries?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tournament?: Prisma.TournamentUpdateOneRequiredWithoutCategoriesNestedInput
+  entries?: Prisma.EntryUpdateManyWithoutCategoryNestedInput
+}
+
+export type TournamentCategoryUncheckedUpdateWithoutStagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tournamentId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  modality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  level?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryFeeCents?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxEntries?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
 export type TournamentCategoryCreateManyTournamentInput = {
   id?: string
   name: string
@@ -613,6 +808,8 @@ export type TournamentCategoryUpdateWithoutTournamentInput = {
   maxEntries?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  entries?: Prisma.EntryUpdateManyWithoutCategoryNestedInput
+  stages?: Prisma.StageUpdateManyWithoutCategoryNestedInput
 }
 
 export type TournamentCategoryUncheckedUpdateWithoutTournamentInput = {
@@ -625,6 +822,8 @@ export type TournamentCategoryUncheckedUpdateWithoutTournamentInput = {
   maxEntries?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  entries?: Prisma.EntryUncheckedUpdateManyWithoutCategoryNestedInput
+  stages?: Prisma.StageUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type TournamentCategoryUncheckedUpdateManyWithoutTournamentInput = {
@@ -640,6 +839,44 @@ export type TournamentCategoryUncheckedUpdateManyWithoutTournamentInput = {
 }
 
 
+/**
+ * Count Type TournamentCategoryCountOutputType
+ */
+
+export type TournamentCategoryCountOutputType = {
+  entries: number
+  stages: number
+}
+
+export type TournamentCategoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  entries?: boolean | TournamentCategoryCountOutputTypeCountEntriesArgs
+  stages?: boolean | TournamentCategoryCountOutputTypeCountStagesArgs
+}
+
+/**
+ * TournamentCategoryCountOutputType without action
+ */
+export type TournamentCategoryCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TournamentCategoryCountOutputType
+   */
+  select?: Prisma.TournamentCategoryCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TournamentCategoryCountOutputType without action
+ */
+export type TournamentCategoryCountOutputTypeCountEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EntryWhereInput
+}
+
+/**
+ * TournamentCategoryCountOutputType without action
+ */
+export type TournamentCategoryCountOutputTypeCountStagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StageWhereInput
+}
+
 
 export type TournamentCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -653,6 +890,9 @@ export type TournamentCategorySelect<ExtArgs extends runtime.Types.Extensions.In
   rules?: boolean
   createdAt?: boolean
   tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
+  entries?: boolean | Prisma.TournamentCategory$entriesArgs<ExtArgs>
+  stages?: boolean | Prisma.TournamentCategory$stagesArgs<ExtArgs>
+  _count?: boolean | Prisma.TournamentCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tournamentCategory"]>
 
 export type TournamentCategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -699,6 +939,9 @@ export type TournamentCategorySelectScalar = {
 export type TournamentCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tournamentId" | "name" | "modality" | "gender" | "level" | "entryFeeCents" | "maxEntries" | "rules" | "createdAt", ExtArgs["result"]["tournamentCategory"]>
 export type TournamentCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
+  entries?: boolean | Prisma.TournamentCategory$entriesArgs<ExtArgs>
+  stages?: boolean | Prisma.TournamentCategory$stagesArgs<ExtArgs>
+  _count?: boolean | Prisma.TournamentCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TournamentCategoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
@@ -711,6 +954,8 @@ export type $TournamentCategoryPayload<ExtArgs extends runtime.Types.Extensions.
   name: "TournamentCategory"
   objects: {
     tournament: Prisma.$TournamentPayload<ExtArgs>
+    entries: Prisma.$EntryPayload<ExtArgs>[]
+    stages: Prisma.$StagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1118,6 +1363,8 @@ readonly fields: TournamentCategoryFieldRefs;
 export interface Prisma__TournamentCategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tournament<T extends Prisma.TournamentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TournamentDefaultArgs<ExtArgs>>): Prisma.Prisma__TournamentClient<runtime.Types.Result.GetResult<Prisma.$TournamentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  entries<T extends Prisma.TournamentCategory$entriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TournamentCategory$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stages<T extends Prisma.TournamentCategory$stagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TournamentCategory$stagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1550,6 +1797,54 @@ export type TournamentCategoryDeleteManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many TournamentCategories to delete.
    */
   limit?: number
+}
+
+/**
+ * TournamentCategory.entries
+ */
+export type TournamentCategory$entriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Entry
+   */
+  select?: Prisma.EntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Entry
+   */
+  omit?: Prisma.EntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EntryInclude<ExtArgs> | null
+  where?: Prisma.EntryWhereInput
+  orderBy?: Prisma.EntryOrderByWithRelationInput | Prisma.EntryOrderByWithRelationInput[]
+  cursor?: Prisma.EntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EntryScalarFieldEnum | Prisma.EntryScalarFieldEnum[]
+}
+
+/**
+ * TournamentCategory.stages
+ */
+export type TournamentCategory$stagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Stage
+   */
+  select?: Prisma.StageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Stage
+   */
+  omit?: Prisma.StageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StageInclude<ExtArgs> | null
+  where?: Prisma.StageWhereInput
+  orderBy?: Prisma.StageOrderByWithRelationInput | Prisma.StageOrderByWithRelationInput[]
+  cursor?: Prisma.StageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StageScalarFieldEnum | Prisma.StageScalarFieldEnum[]
 }
 
 /**

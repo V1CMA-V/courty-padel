@@ -37,6 +37,7 @@ interface TournamentCategory {
   level: string | null
   entryFeeCents: number | null
   maxEntries: number | null
+  _count: { entries: number }
 }
 
 interface Tournament {
@@ -51,7 +52,6 @@ interface Tournament {
   status: string
   visibility: string
   categories: TournamentCategory[]
-  _count: { enrollments: number }
 }
 
 interface Filters {
@@ -61,14 +61,35 @@ interface Filters {
   gender: string
 }
 
-const STATUS_MAP: Record<string, { bg: string; text: string; label: string }> = {
-  DRAFT: { bg: 'bg-muted', text: 'text-muted-foreground', label: 'Borrador' },
-  REGISTRATION_OPEN: { bg: 'bg-green-500/10', text: 'text-green-600 dark:text-green-400', label: 'Inscripción abierta' },
-  REGISTRATION_CLOSED: { bg: 'bg-yellow-500/10', text: 'text-yellow-600 dark:text-yellow-400', label: 'Inscripción cerrada' },
-  IN_PROGRESS: { bg: 'bg-blue-500/10', text: 'text-blue-600 dark:text-blue-400', label: 'En curso' },
-  FINISHED: { bg: 'bg-muted', text: 'text-muted-foreground', label: 'Finalizado' },
-  CANCELLED: { bg: 'bg-red-500/10', text: 'text-red-600 dark:text-red-400', label: 'Cancelado' },
-}
+const STATUS_MAP: Record<string, { bg: string; text: string; label: string }> =
+  {
+    DRAFT: { bg: 'bg-muted', text: 'text-muted-foreground', label: 'Borrador' },
+    REGISTRATION_OPEN: {
+      bg: 'bg-green-500/10',
+      text: 'text-green-600 dark:text-green-400',
+      label: 'Inscripción abierta',
+    },
+    REGISTRATION_CLOSED: {
+      bg: 'bg-yellow-500/10',
+      text: 'text-yellow-600 dark:text-yellow-400',
+      label: 'Inscripción cerrada',
+    },
+    IN_PROGRESS: {
+      bg: 'bg-blue-500/10',
+      text: 'text-blue-600 dark:text-blue-400',
+      label: 'En curso',
+    },
+    FINISHED: {
+      bg: 'bg-muted',
+      text: 'text-muted-foreground',
+      label: 'Finalizado',
+    },
+    CANCELLED: {
+      bg: 'bg-red-500/10',
+      text: 'text-red-600 dark:text-red-400',
+      label: 'Cancelado',
+    },
+  }
 
 const MODALITY_MAP: Record<string, string> = {
   SINGLES: 'Individual',
@@ -109,9 +130,15 @@ function formatPrice(cents: number) {
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const s = STATUS_MAP[status] ?? { bg: 'bg-muted', text: 'text-muted-foreground', label: status }
+  const s = STATUS_MAP[status] ?? {
+    bg: 'bg-muted',
+    text: 'text-muted-foreground',
+    label: status,
+  }
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${s.bg} ${s.text}`}>
+    <span
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${s.bg} ${s.text}`}
+    >
       {s.label}
     </span>
   )
@@ -168,7 +195,9 @@ function TournamentCard({ tournament }: { tournament: Tournament }) {
           <div className="space-y-1.5 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
               <Calendar className="size-3.5 shrink-0" />
-              <span>{formatDateRange(tournament.startDate, tournament.endDate)}</span>
+              <span>
+                {formatDateRange(tournament.startDate, tournament.endDate)}
+              </span>
             </div>
             {tournament.location && (
               <div className="flex items-center gap-2">
@@ -178,7 +207,13 @@ function TournamentCard({ tournament }: { tournament: Tournament }) {
             )}
             <div className="flex items-center gap-2">
               <Users className="size-3.5 shrink-0" />
-              <span>{tournament._count.enrollments} inscritos</span>
+              <span>
+                {tournament.categories.reduce(
+                  (sum, c) => sum + c._count.entries,
+                  0,
+                )}{' '}
+                inscritos
+              </span>
             </div>
           </div>
 
@@ -233,7 +268,12 @@ function FiltersPanel({
               Filtros
             </CardTitle>
             {hasFilters && (
-              <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={onClear}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 text-xs"
+                onClick={onClear}
+              >
                 <X className="size-3" />
                 Limpiar
               </Button>
@@ -243,14 +283,21 @@ function FiltersPanel({
         <CardContent className="space-y-4">
           <Field>
             <FieldLabel>Estado</FieldLabel>
-            <Select value={filters.status} onValueChange={(v) => onChange({ ...filters, status: v })}>
+            <Select
+              value={filters.status}
+              onValueChange={(v) => onChange({ ...filters, status: v })}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Todos" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="REGISTRATION_OPEN">Inscripción abierta</SelectItem>
-                  <SelectItem value="REGISTRATION_CLOSED">Inscripción cerrada</SelectItem>
+                  <SelectItem value="REGISTRATION_OPEN">
+                    Inscripción abierta
+                  </SelectItem>
+                  <SelectItem value="REGISTRATION_CLOSED">
+                    Inscripción cerrada
+                  </SelectItem>
                   <SelectItem value="IN_PROGRESS">En curso</SelectItem>
                   <SelectItem value="FINISHED">Finalizado</SelectItem>
                 </SelectGroup>
@@ -262,7 +309,10 @@ function FiltersPanel({
 
           <Field>
             <FieldLabel>Modalidad</FieldLabel>
-            <Select value={filters.modality} onValueChange={(v) => onChange({ ...filters, modality: v })}>
+            <Select
+              value={filters.modality}
+              onValueChange={(v) => onChange({ ...filters, modality: v })}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Todas" />
               </SelectTrigger>
@@ -279,7 +329,10 @@ function FiltersPanel({
 
           <Field>
             <FieldLabel>Género</FieldLabel>
-            <Select value={filters.gender} onValueChange={(v) => onChange({ ...filters, gender: v })}>
+            <Select
+              value={filters.gender}
+              onValueChange={(v) => onChange({ ...filters, gender: v })}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Todos" />
               </SelectTrigger>
@@ -338,7 +391,11 @@ export function TournamentsPage() {
     setFilters({ search: '', status: '', modality: '', gender: '' })
   }
 
-  const activeFilterCount = [filters.status, filters.modality, filters.gender].filter(Boolean).length
+  const activeFilterCount = [
+    filters.status,
+    filters.modality,
+    filters.gender,
+  ].filter(Boolean).length
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -356,7 +413,9 @@ export function TournamentsPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
             value={filters.search}
-            onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
+            onChange={(e) =>
+              setFilters((f) => ({ ...f, search: e.target.value }))
+            }
             placeholder="Buscar por nombre o ubicación..."
             className="pl-9"
           />
@@ -379,7 +438,12 @@ export function TournamentsPage() {
       {/* Mobile filters */}
       {showMobileFilters && (
         <div className="md:hidden mb-6">
-          <FiltersPanel filters={filters} onChange={setFilters} onClear={clearFilters} isMobile />
+          <FiltersPanel
+            filters={filters}
+            onChange={setFilters}
+            onClear={clearFilters}
+            isMobile
+          />
         </div>
       )}
 
@@ -387,7 +451,11 @@ export function TournamentsPage() {
       <div className="flex gap-6">
         {/* Desktop filters sidebar */}
         <div className="hidden md:block w-64 shrink-0">
-          <FiltersPanel filters={filters} onChange={setFilters} onClear={clearFilters} />
+          <FiltersPanel
+            filters={filters}
+            onChange={setFilters}
+            onClear={clearFilters}
+          />
         </div>
 
         {/* Tournament grid */}
@@ -405,8 +473,16 @@ export function TournamentsPage() {
               <p className="mt-1 text-sm text-muted-foreground">
                 Intenta ajustar tus filtros de búsqueda.
               </p>
-              {(filters.search || filters.status || filters.modality || filters.gender) && (
-                <Button variant="outline" size="sm" className="mt-4" onClick={clearFilters}>
+              {(filters.search ||
+                filters.status ||
+                filters.modality ||
+                filters.gender) && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="mt-4"
+                  onClick={clearFilters}
+                >
                   Limpiar filtros
                 </Button>
               )}
@@ -414,7 +490,10 @@ export function TournamentsPage() {
           ) : (
             <>
               <p className="text-sm text-muted-foreground mb-4">
-                {tournaments.length} {tournaments.length === 1 ? 'torneo encontrado' : 'torneos encontrados'}
+                {tournaments.length}{' '}
+                {tournaments.length === 1
+                  ? 'torneo encontrado'
+                  : 'torneos encontrados'}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {tournaments.map((t) => (
