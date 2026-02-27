@@ -1,0 +1,72 @@
+<section
+  class="relative min-h-[90dvh] flex items-center justify-center overflow-hidden"
+>
+  <!-- Background Image -->
+  <div
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style="background-image: url('https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=2070&auto=format&fit=crop')"
+  >
+  </div>
+
+  <!-- Gradient Overlay -->
+  <div
+    class="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/80"
+  >
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <span
+      class="inline-block mb-4 px-4 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium tracking-wide backdrop-blur-sm border border-primary/30"
+    >
+      La plataforma de padel #1 en tu ciudad
+    </span>
+
+    <h1
+      class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight"
+    >
+      Juega. Compite. <br />
+      <span class="text-primary">Gana.</span>
+    </h1>
+
+    <p
+      class="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
+    >
+      Encuentra torneos, reserva canchas y conecta con la comunidad de padel más
+      grande. Todo desde un solo lugar.
+    </p>
+
+    <div
+      class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+    >
+      <a
+        href="/sign-in"
+        class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
+      >
+        Comenzar ahora
+      </a>
+      <a
+        href="#torneos"
+        class="inline-flex items-center justify-center h-12 px-8 rounded-lg border border-white/30 text-white font-semibold text-base hover:bg-white/10 backdrop-blur-sm transition-all hover:-translate-y-0.5"
+      >
+        Ver torneos
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg
+      class="w-6 h-6 text-white/60"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>

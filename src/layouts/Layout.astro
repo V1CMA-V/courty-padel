@@ -1,13 +1,33 @@
 ---
 import '../styles/global.css'
-import { ModeToggle } from '@/components/ModeToggle'
+import { Header } from '@/components/Header'
+import Footer from '@/components/Footer.astro'
+import { auth } from '@/lib/auth'
+import { Toaster } from '@/components/ui/sonner'
+
+export const prerender = false
 
 interface Props {
   title?: string
   description?: string
 }
 
-const { title = 'Courty Padel', description = 'description' } = Astro.props
+const { title = 'Courty Padel', description = 'La plataforma de padel #1.' } =
+  Astro.props
+
+const session = await auth.api.getSession({
+  headers: Astro.request.headers,
+})
+
+const user = session?.user
+  ? {
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+    }
+  : null
+
+const currentPath = Astro.url.pathname
 ---
 
 <!doctype html>
@@ -20,12 +40,18 @@ const { title = 'Courty Padel', description = 'description' } = Astro.props
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <header>
-      <ModeToggle client:load />
-    </header>
+  <body class="font-[Inter,sans-serif]">
+    <Header client:load user={user} currentPath={currentPath} />
     <slot />
+    <Toaster />
+    <Footer />
   </body>
 </html>
 
