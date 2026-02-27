@@ -70,6 +70,11 @@ export type Player = Prisma.PlayerModel
  */
 export type Tournament = Prisma.TournamentModel
 /**
+ * Model TournamentCategory
+ * 
+ */
+export type TournamentCategory = Prisma.TournamentCategoryModel
+/**
  * Model TournamentEnrollment
  * 
  */

@@ -57,6 +57,7 @@ export const ModelName = {
   Verification: 'Verification',
   Player: 'Player',
   Tournament: 'Tournament',
+  TournamentCategory: 'TournamentCategory',
   TournamentEnrollment: 'TournamentEnrollment'
 } as const
 
@@ -157,17 +158,34 @@ export const TournamentScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  venueNote: 'venueNote',
   location: 'location',
-  date: 'date',
-  maxPairs: 'maxPairs',
-  category: 'category',
-  status: 'status',
   imageUrl: 'imageUrl',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  visibility: 'visibility',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type TournamentScalarFieldEnum = (typeof TournamentScalarFieldEnum)[keyof typeof TournamentScalarFieldEnum]
+
+
+export const TournamentCategoryScalarFieldEnum = {
+  id: 'id',
+  tournamentId: 'tournamentId',
+  name: 'name',
+  modality: 'modality',
+  gender: 'gender',
+  level: 'level',
+  entryFeeCents: 'entryFeeCents',
+  maxEntries: 'maxEntries',
+  rules: 'rules',
+  createdAt: 'createdAt'
+} as const
+
+export type TournamentCategoryScalarFieldEnum = (typeof TournamentCategoryScalarFieldEnum)[keyof typeof TournamentCategoryScalarFieldEnum]
 
 
 export const TournamentEnrollmentScalarFieldEnum = {

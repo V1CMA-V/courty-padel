@@ -1,0 +1,13 @@
+---
+export const prerender = false
+
+import { TournamentsPage } from '@/components/TournamentsPage'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout
+  title="Torneos - Courty Padel"
+  description="Explora y participa en torneos de padel."
+>
+  <TournamentsPage client:load />
+</Layout>

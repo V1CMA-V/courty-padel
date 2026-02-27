@@ -390,6 +390,7 @@ export const ModelName = {
   Verification: 'Verification',
   Player: 'Player',
   Tournament: 'Tournament',
+  TournamentCategory: 'TournamentCategory',
   TournamentEnrollment: 'TournamentEnrollment'
 } as const
 
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "player" | "tournament" | "tournamentEnrollment"
+    modelProps: "user" | "session" | "account" | "verification" | "player" | "tournament" | "tournamentCategory" | "tournamentEnrollment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -854,6 +855,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TournamentCategory: {
+      payload: Prisma.$TournamentCategoryPayload<ExtArgs>
+      fields: Prisma.TournamentCategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TournamentCategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TournamentCategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.TournamentCategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TournamentCategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>
+        }
+        findMany: {
+          args: Prisma.TournamentCategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>[]
+        }
+        create: {
+          args: Prisma.TournamentCategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>
+        }
+        createMany: {
+          args: Prisma.TournamentCategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TournamentCategoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>[]
+        }
+        delete: {
+          args: Prisma.TournamentCategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>
+        }
+        update: {
+          args: Prisma.TournamentCategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.TournamentCategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TournamentCategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TournamentCategoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.TournamentCategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TournamentCategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.TournamentCategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTournamentCategory>
+        }
+        groupBy: {
+          args: Prisma.TournamentCategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TournamentCategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TournamentCategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TournamentCategoryCountAggregateOutputType> | number
+        }
+      }
+    }
     TournamentEnrollment: {
       payload: Prisma.$TournamentEnrollmentPayload<ExtArgs>
       fields: Prisma.TournamentEnrollmentFieldRefs
@@ -1048,17 +1123,34 @@ export const TournamentScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  venueNote: 'venueNote',
   location: 'location',
-  date: 'date',
-  maxPairs: 'maxPairs',
-  category: 'category',
-  status: 'status',
   imageUrl: 'imageUrl',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  visibility: 'visibility',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type TournamentScalarFieldEnum = (typeof TournamentScalarFieldEnum)[keyof typeof TournamentScalarFieldEnum]
+
+
+export const TournamentCategoryScalarFieldEnum = {
+  id: 'id',
+  tournamentId: 'tournamentId',
+  name: 'name',
+  modality: 'modality',
+  gender: 'gender',
+  level: 'level',
+  entryFeeCents: 'entryFeeCents',
+  maxEntries: 'maxEntries',
+  rules: 'rules',
+  createdAt: 'createdAt'
+} as const
+
+export type TournamentCategoryScalarFieldEnum = (typeof TournamentCategoryScalarFieldEnum)[keyof typeof TournamentCategoryScalarFieldEnum]
 
 
 export const TournamentEnrollmentScalarFieldEnum = {
@@ -1266,6 +1358,7 @@ export type GlobalOmitConfig = {
   verification?: Prisma.VerificationOmit
   player?: Prisma.PlayerOmit
   tournament?: Prisma.TournamentOmit
+  tournamentCategory?: Prisma.TournamentCategoryOmit
   tournamentEnrollment?: Prisma.TournamentEnrollmentOmit
 }
 
